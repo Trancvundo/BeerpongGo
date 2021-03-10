@@ -10,5 +10,5 @@ With this app you can track your beerpong games score with your friends with the
 
 If you want uses for yourself need made a firebase account and added the code with api-key and url.
 
-Made in 2020.
+Made in 2020. Reuploaded to hide api-key and url
 
