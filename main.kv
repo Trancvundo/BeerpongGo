@@ -1,0 +1,456 @@
+#:import utils kivy.utils
+#:import Factory kivy.factory.Factory
+
+<WelcomeScreen>:
+    FloatLayout:
+    
+        Image:
+            id: logo
+            size_hint: 0.5,0.5 
+            pos_hint: {"center_y": 0.75, "center_x": .45}
+            source: "logo.png"
+
+        MDRaisedButton:
+            id: log_in_button
+            size_hint: .9, .05
+            pos_hint: {"center_y": .4, "center_x": .5}
+            text: "Sign In"
+            on_release:
+                root.parent.current = "signin_screen"
+    
+        MDRaisedButton:
+            id: create_account_button
+            size_hint: .9, .05
+            pos_hint: {"center_y": .3, "center_x": .5}
+            text: "Create Account"
+            on_release:
+                root.parent.current = "create_account_screen"
+
+
+<SigninScreen>:
+    FloatLayout:
+    
+        Image:
+            id: logo
+            size_hint: 0.5,0.5 
+            pos_hint: {"center_y": 0.75, "center_x": .45}
+            source: "logo.png"
+
+    
+        MDRaisedButton:
+            size_hint: .3, .05
+            pos_hint: {"center_y": 0.2, "center_x": .30}
+            text: "Back"
+            on_release:
+                root.parent.current = "welcome_screen"
+                
+        MDTextFieldRound:
+            id: email
+            icon_left: "email"
+            size_hint: .8 ,.05
+            pos_hint: {"center_y": 0.5, "center_x": .5}
+            hint_text: "Email"
+            multiline: False
+        
+        MDTextFieldRound:
+            id: password
+            icon_left: "key-variant"
+            icon_right: "eye-off"
+            size_hint: .8 ,.05
+            pos_hint: {"center_y": 0.4, "center_x": .5}
+            hint_text: "Password"
+            password: True
+            multiline: False
+            
+        MDRaisedButton:
+            text: "Reset Password"
+            size_hint: .3 ,.05
+            pos_hint: {"center_y": 0.30, "center_x": .30}
+
+        MDRaisedButton:
+            text: "Sign in"
+            size_hint: .3,.05
+            pos_hint: {"center_y": 0.30, "center_x": .70}
+            on_release:
+                root.signin(email.text, password.text)
+
+
+
+                
+<CreateAccountScreen>:
+    FloatLayout:
+    
+        Image:
+            id: logo
+            size_hint: 0.5,0.5 
+            pos_hint: {"center_y": 0.75, "center_x": .45}
+            source: "logo.png"
+        
+        MDRaisedButton:
+            size_hint: .3, .05
+            pos_hint: {"center_y": 0.2, "center_x": .30}
+            text: "Back"
+            on_release:
+                root.parent.current = "welcome_screen"
+
+        MDTextFieldRound:
+            id: email
+            icon_left: "email"
+            size_hint: .8 ,.05
+            pos_hint: {"center_y": 0.5, "center_x": .5}
+            hint_text: "Email"
+            multiline: False
+        
+        MDTextFieldRound:
+            id: password
+            icon_left: "key-variant"
+            icon_right: "eye-off"            
+            size_hint: .8 ,.05
+            pos_hint: {"center_y": 0.4, "center_x": .5}
+            hint_text: "Password"
+            password: True
+            multiline: False
+              
+        MDRaisedButton:
+            text: "Create Account"
+            size_hint: .3 ,.05
+            pos_hint: {"center_y": 0.30, "center_x": .70}
+            on_release:
+                root.register(email.text, password.text)
+
+<MainScreen>:
+    usernamev: usernamev
+    total_scorev: total_scorev
+    FloatLayout:
+        orientation: 'vertical'
+ 
+        Image:
+            id: logo
+            size_hint: 0.5,0.5 
+            pos_hint: {"center_y": 0.75, "center_x": .45}
+            source: "logo.png"       
+       
+        MDLabel:
+            id: usernamev
+            font_style: "H4"
+            theme_text_color: "Custom"   
+            text_color: 1, 0, 0, 1     
+            size_hint: 1,.01
+            halign: "center"
+            pos_hint: {"top": .95, "center_x": .5}
+            text: "Username"
+        
+        MDLabel:
+            id: total_scorev
+            font_style: "H4"
+            theme_text_color: "Custom"   
+            text_color: 1, 0, 0, 1     
+            halign: "center"
+            size_hint: 0.95 , .01
+            pos_hint: {"top": .9, "center_x": .5}
+            text: "Score"
+
+     
+            
+        MDRaisedButton:
+            id: stats_button
+            size_hint: .9, .075
+            pos_hint: {"top": .475, "center_x": .5}
+            text: "Stats"
+            on_release:
+                app.show_Stats()
+    
+        MDRaisedButton:
+            id: leaderboard_button
+            size_hint: .9, .075
+            pos_hint: {"top": .375, "center_x": .5}
+            text: "Leaderbord"
+            on_release:
+                app.getLeader()
+                app.show_Leaderboard()
+                
+                      
+        MDRaisedButton:
+            id: start_solo_game_button
+            size_hint: .9, .15
+            pos_hint: {"top": .275, "center_x": .5}
+            text: "Start Solo Game"
+            on_release:
+                root.parent.current = "solo_game_screen"
+    
+        MDRaisedButton:
+            id: start_multiplayer_game_button
+            size_hint: .9, .075
+            pos_hint: {"top": .1, "center_x": .5}
+            text: "Start Multiplayer Game"
+            on_release:
+                app.show_Multiplayer()
+
+        MDRaisedButton:
+            id: menubtn
+            size_hint: 0.2,.05
+            text: "Menu"
+            pos_hint: {"top": 0.99, "right": 0.99}
+            on_release: root.menu1.open()
+
+<ContentNick>:
+    orientation: "vertical"
+    size_hint_y: None
+
+    MDLabel:
+        text: "It changes when entering another screen"
+
+    MDTextField:
+        hint_text: "Username"        
+            
+<ContentWon>:
+    orientation: "vertical"
+    size_hint_y: None
+
+    MDLabel:
+        text: "Enter how many cups you have left"
+
+    MDTextField:
+        id: text_field_error
+        hint_text: "Cups left: "
+        helper_text: "(1-10)"
+        helper_text_mode: "persistent"
+        pos_hint: {"center_y": .5}
+        input_filter: "int"
+        
+
+<SoloGameScreen>:
+    usernamev: usernamev
+    total_scorev: total_scorev
+
+    cup: cup
+    FloatLayout:
+
+        orientation: 'vertical'
+        canvas.before:
+            Rectangle:
+                pos: self.pos
+                size: self.size
+                source: "background.png"
+
+        
+        MDLabel:
+            id: usernamev
+            font_style: "H4"
+            theme_text_color: "Custom"
+            text_color: 1, 0, 0, 1
+            size_hint: 1,.01
+            halign: "center"
+            pos_hint: {"top": .95, "center_x": .5}
+            text: "Username"
+        
+        MDLabel:
+            id: total_scorev
+            font_style: "H4"
+            theme_text_color: "Custom"
+            text_color: 1, 0, 0, 1
+            halign: "center"
+            size_hint: 0.95 , .01
+            pos_hint: {"top": .9, "center_x": .5}
+            text: "Score"
+            
+        MDLabel:
+            id: cup
+            font_style: "H4"
+            theme_text_color: "Custom"   
+            text_color: 1, 0, 0, 1     
+            halign: "center"
+            size_hint: .9 , .01
+            pos_hint: {"top": .85, "center_x": .5}
+            text: "10"
+
+        MDRaisedButton:
+            id: actionbtn
+            size_hint: .3,.3
+            pos_hint: {"bottom": 0.0, "center_x": .5}
+            opacity: 0
+            on_press: root.changeImage()
+            on_release:
+                root.actionbtn()
+
+        MDRaisedButton:
+            id: enemybtn
+            size_hint: .2,.05
+            text: "Enemy"
+            pos_hint: {"top": 0.99, "left": 0.02}
+            on_release: root.menu2.open()
+            
+        MDRaisedButton:
+            id: menubtn
+            size_hint: 0.2,.05
+            text: "Menu"
+            pos_hint: {"top": 0.99, "right": 0.99}
+            on_release: root.menu3.open()
+            
+        MDIconButton:
+            icon: "normalpp.png"
+            user_font_size: "36dp"
+            on_release: app.show_ball_grid_bottom_sheet(), root.changeImage()
+            pos_hint: {"x": 0.0, "y": 0.0}
+
+        MDIconButton:
+            icon: "bottle.png"
+            user_font_size: "36dp"
+            pos_hint: {"right": 1, "y": 0.0}
+            on_release: app.show_item_grid_bottom_sheet(), root.changeImage()
+        
+        Image:
+            id: my_image
+            pos_hint: {"center_x":0.5,"y":0.0}
+            size_hint: .3,.3
+            source: root.image_source
+
+        Image:
+            id: redcup10
+            size_hint: 0.1,0.1 
+            pos_hint: {"center_y": 0.63, "center_x": .65}
+            source: "redcup.png"
+            opacity: root.red10_opi
+            
+        Image:
+            id: redcup9
+            size_hint: 0.1,0.1 
+            pos_hint: {"center_y": 0.63, "center_x": .55}
+            source: "redcup.png"
+            opacity: root.red9_opi
+
+        Image:
+            id: redcup8
+            size_hint: 0.1,0.1 
+            pos_hint: {"center_y": 0.63, "center_x": .45}
+            source: "redcup.png"
+            opacity: root.red8_opi
+
+        Image:
+            id: redcup7
+            size_hint: 0.1,0.1 
+            pos_hint: {"center_y": 0.63, "center_x": .35}
+            source: "redcup.png"
+            opacity: root.red7_opi
+            
+        Image:
+            id: redcup6
+            size_hint: 0.1,0.1
+            pos_hint: {"center_y": 0.59, "center_x": .60}
+            source: "redcup.png"
+            opacity: root.red6_opi
+            
+        Image:
+            id: redcup5
+            size_hint: 0.1,0.1 
+            pos_hint: {"center_y": 0.59, "center_x": .50}
+            source: "redcup.png"
+            opacity: root.red5_opi           
+            
+        Image:
+            id: redcup4
+            size_hint: 0.1,0.1 
+            pos_hint: {"center_y": 0.59, "center_x": .40}
+            source: "redcup.png"
+            opacity: root.red4_opi
+                    
+            
+        Image:
+            id: redcup3
+            size_hint: 0.1,0.1 
+            pos_hint: {"center_y": 0.55, "center_x": .55}
+            source: "redcup.png"
+            opacity: root.red3_opi
+            
+        Image:
+            id: redcup2
+            size_hint: 0.1,0.1 
+            pos_hint: {"center_y": 0.55, "center_x": .45}
+            source: "redcup.png"
+            opacity: root.red2_opi
+                        
+        Image:
+            id: redcup1
+            size_hint: 0.1,0.1 
+            pos_hint: {"center_y": 0.51, "center_x": .5}
+            source: "redcup.png"
+            opacity: root.red1_opi         
+
+
+
+
+
+<WonScreen>:
+    usernamev: usernamev
+    FloatLayout:
+        orientation: 'vertical'
+
+        Image:
+            id: fireworks
+            size_hint: 0.8,0.8 
+            pos_hint: {"center_y": 0.50, "center_x": .5}
+            source: "fireworks.png"
+ 
+        Image:
+            id: logo
+            size_hint: 0.5,0.5 
+            pos_hint: {"center_y": 0.55, "center_x": .45}
+            source: "logo.png"       
+       
+        MDLabel:
+            id: usernamev
+            font_style: "H4"
+            theme_text_color: "Custom"   
+            text_color: 1, 0, 0, 1     
+            size_hint: 1,.01
+            halign: "center"
+            pos_hint: {"top": .9, "center_x": .5}
+            text: "Username"
+        
+        MDLabel:
+            font_style: "H4"
+            theme_text_color: "Custom"   
+            text_color: 1, 0, 0, 1     
+            halign: "center"
+            size_hint: 0.95 , .01
+            pos_hint: {"top": .95, "center_x": .5}
+            text: "Congratulation"
+
+        MDLabel:
+            font_style: "H4"
+            theme_text_color: "Custom"   
+            text_color: 1, 0, 0, 1     
+            halign: "center"
+            size_hint: 0.95 , .01
+            pos_hint: {"top": .85, "center_x": .5}
+            text: "You have won!"
+              
+        MDRaisedButton:
+            opacity: 0
+            size_hint: 1,1
+            pos_hint: {"center_x": .5,"center_y": .5}
+            on_release:
+                root.parent.current = "main_screen"  
+
+
+
+
+
+
+<SetNicknameScreen>:
+    FloatLayout:
+        MDTextField:
+            id: nickname
+            size_hint: .9 ,.1
+            pos_hint: {"center_x": .5, "top": .575}
+            hint_text: "nickname"
+            required: True
+            helper_text: "Enter text"
+            multiline: False
+              
+        MDRaisedButton:
+            text: "Set nickname"
+            size_hint: .4 ,.05
+            pos_hint: {"center_x": .75, "top": .45}
+            on_release:
+                root.setnickname(nickname.text)
